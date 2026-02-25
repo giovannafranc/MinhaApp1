@@ -1,6 +1,6 @@
 ﻿using MinhaApp1.Models;
 
-namespace MinhaApp1.Services
+namespace MinhaApp1.Interfaces
 {
     public interface IProdutoService
     {

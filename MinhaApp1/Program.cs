@@ -2,6 +2,7 @@ using MinhaApp1.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MinhaApp1.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 //Configuracao do meu JWT 
 

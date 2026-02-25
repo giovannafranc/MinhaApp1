@@ -1,4 +1,5 @@
-﻿using MinhaApp1.Models;
+﻿using MinhaApp1.Interfaces;
+using MinhaApp1.Models;
 
 namespace MinhaApp1.Services
 {

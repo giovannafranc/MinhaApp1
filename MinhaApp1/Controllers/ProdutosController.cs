@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MinhaApp1.Models;
-using MinhaApp1.Services;
 using Microsoft.AspNetCore.Authorization;
+using MinhaApp1.Interfaces;
 
 
 namespace MinhaApp1.Controllers
