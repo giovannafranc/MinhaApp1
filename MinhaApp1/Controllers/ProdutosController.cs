@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MinhaApp1.Models;
 using MinhaApp1.Services;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MinhaApp1.Controllers
 {
@@ -15,12 +17,14 @@ namespace MinhaApp1.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(_service.GetAll());
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -32,6 +36,7 @@ namespace MinhaApp1.Controllers
             return Ok(produto);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Create([FromBody] Produto produto)
         {
@@ -39,6 +44,7 @@ namespace MinhaApp1.Controllers
             return CreatedAtAction(nameof(GetById), new { id = criado.Id }, criado);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Produto produto)
         {
@@ -50,6 +56,7 @@ namespace MinhaApp1.Controllers
             return Ok(atualizado);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
