@@ -1,13 +1,14 @@
-﻿using MinhaApp1.Models;
+﻿using MinhaApp1.DTOs;
+using MinhaApp1.Models;
 
 namespace MinhaApp1.Interfaces
 {
     public interface IProdutoService
     {
-        List<Produto> GetAll();
-        Produto GetById(int id);
-        Produto Create(Produto produto);
-        Produto Update(int id, Produto produto);
+        List<ProdutoResponseDto> GetAll();
+        ProdutoResponseDto GetById(int id);
+        ProdutoResponseDto Create(ProdutoCreateDto dto);
+        ProdutoResponseDto Update(int id, ProdutoCreateDto dto);
         bool Delete(int id);
     }
 }

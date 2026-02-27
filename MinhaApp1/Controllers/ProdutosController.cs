@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinhaApp1.Models;
 using Microsoft.AspNetCore.Authorization;
 using MinhaApp1.Interfaces;
+using MinhaApp1.DTOs;
 
 
 namespace MinhaApp1.Controllers
@@ -38,17 +38,17 @@ namespace MinhaApp1.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Create([FromBody] Produto produto)
+        public IActionResult Create([FromBody] ProdutoCreateDto dto)
         {
-            var criado = _service.Create(produto);
+            var criado = _service.Create(dto);
             return CreatedAtAction(nameof(GetById), new { id = criado.Id }, criado);
         }
 
         [Authorize]
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Produto produto)
+        public IActionResult Update(int id, [FromBody] ProdutoCreateDto dto)
         {
-            var atualizado = _service.Update(id, produto);
+            var atualizado = _service.Update(id, dto);
 
             if (atualizado == null)
                 return NotFound("Produto não encontrado.");

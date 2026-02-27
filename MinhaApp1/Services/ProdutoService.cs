@@ -1,4 +1,6 @@
-﻿using MinhaApp1.Interfaces;
+﻿using MinhaApp1.Data;
+using MinhaApp1.DTOs;
+using MinhaApp1.Interfaces;
 using MinhaApp1.Models;
 
 namespace MinhaApp1.Services
@@ -14,24 +16,51 @@ namespace MinhaApp1.Services
         }
 
 
-        public List<Produto> GetAll()
+        public List<ProdutoResponseDto> GetAll()
         {
-            return _context.Produtos.ToList();
+            return _context.Produtos.
+                Select(p => new ProdutoResponseDto
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Preco = p.Preco
+                })
+                .ToList();
         }
 
-        public Produto GetById(int id)
+        public ProdutoResponseDto GetById(int id)
         {
-            return _context.Produtos.FirstOrDefault(p => p.Id == id);
+            var produto = _context.Produtos.FirstOrDefault(p => p.Id == id);
+            if (produto == null) return null;
+
+            return new ProdutoResponseDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Preco = produto.Preco
+            };
         }
 
-        public Produto Create(Produto produto)
+        public ProdutoResponseDto Create(ProdutoCreateDto dto)
         {
+            var produto = new Produto
+            {
+                Nome = dto.Nome,
+                Preco = dto.Preco
+            };
+
             _context.Produtos.Add(produto);
             _context.SaveChanges();
-            return produto;
+            
+            return new ProdutoResponseDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Preco = produto.Preco
+            };
         }
 
-        public Produto Update(int id, Produto produtoAtualizado)
+        public ProdutoResponseDto Update(int id, ProdutoCreateDto produtoAtualizado)
         {
             var produto = _context.Produtos.FirstOrDefault(p => p.Id == id);
 
@@ -41,7 +70,12 @@ namespace MinhaApp1.Services
             produto.Preco = produtoAtualizado.Preco;
             _context.SaveChanges();
 
-            return produto;
+            return new ProdutoResponseDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Preco = produto.Preco
+            };
         }
 
         public bool Delete(int id)
