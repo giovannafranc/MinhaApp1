@@ -67,5 +67,12 @@ namespace MinhaApp1.Controllers
 
             return NoContent();
         }
+
+        [Authorize]
+        [HttpGet("com-categorias")]
+        public IActionResult GetComCategorias()
+        {
+            return Ok(_service.GetComCategorias());
+        }
     }
 }

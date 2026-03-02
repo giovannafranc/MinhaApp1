@@ -1,4 +1,5 @@
-﻿using MinhaApp1.DTOs;
+﻿using MinhaApp1.Dtos;
+using MinhaApp1.DTOs;
 using MinhaApp1.Models;
 
 namespace MinhaApp1.Interfaces
@@ -10,5 +11,6 @@ namespace MinhaApp1.Interfaces
         ProdutoResponseDto Create(ProdutoCreateDto dto);
         ProdutoResponseDto Update(int id, ProdutoCreateDto dto);
         bool Delete(int id);
+        List<ProdutosComCategoriaResponseDto> GetComCategorias();
     }
 }

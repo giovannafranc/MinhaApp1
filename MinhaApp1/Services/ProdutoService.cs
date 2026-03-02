@@ -1,16 +1,18 @@
-﻿using MinhaApp1.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MinhaApp1.Data;
+using MinhaApp1.Dtos;
 using MinhaApp1.DTOs;
 using MinhaApp1.Interfaces;
 using MinhaApp1.Models;
 
 namespace MinhaApp1.Services
 {
-    public class ProdutoService: IProdutoService
+    public class ProdutoService : IProdutoService
     {
 
         private readonly AppDbContext _context;
 
-        public ProdutoService(AppDbContext context) 
+        public ProdutoService(AppDbContext context)
         {
             _context = context;
         }
@@ -51,7 +53,7 @@ namespace MinhaApp1.Services
 
             _context.Produtos.Add(produto);
             _context.SaveChanges();
-            
+
             return new ProdutoResponseDto
             {
                 Id = produto.Id,
@@ -87,6 +89,20 @@ namespace MinhaApp1.Services
             _context.Produtos.Remove(produto);
             _context.SaveChanges();
             return true;
+        }
+
+        public List<ProdutosComCategoriaResponseDto> GetComCategorias()
+        {
+            return _context.Produtos
+                .Include(p => p.Categoria)
+                .Select(p => new ProdutosComCategoriaResponseDto
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Preco = p.Preco,
+                    NomeCategoria = p.Categoria.Nome,
+                })
+                .ToList();
         }
     }
 }

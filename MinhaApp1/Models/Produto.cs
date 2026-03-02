@@ -14,5 +14,9 @@ namespace MinhaApp1.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "O Preço deve ser maior que zero.")]
         public Decimal Preco { get; set; }
 
+        public int CategoriaId { get; set; }
+
+        public Categoria Categoria { get; set; }
+
     }
 }
