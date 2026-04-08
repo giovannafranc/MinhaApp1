@@ -43,6 +43,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 //Configuracao do meu JWT 
